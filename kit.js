@@ -451,6 +451,7 @@ CHECKS.forEach(function(c){
 var kind=c[0], path=c[1], arg=c[3], v=get(path), list=Array.isArray(v)?v:[], ok=false;
 if(kind==="text") ok=txt(v);
 else if(kind==="set") ok=!!v;
+else if(kind==="number") ok=txt(v)&&/\d/.test(v)&&!(arg&&arg.status&&(arg.open||[]).indexOf(get(arg.status))>=0);
 else if(kind==="list") ok=Array.isArray(v);
 else if(kind==="min") ok=list.length>=arg;
 else if(kind==="anyText") ok=list.some(txt);
@@ -513,19 +514,27 @@ var PROMPTS={};
  * prompt this file shipped has been answered. Runs once, before anything is counted. */
 function adoptAnswers(){
   slots().forEach(function(el){
-    if(el.hasAttribute("data-enum")) return;
+    var kind=el.getAttribute("data-enum"); if(kind==="step") return;
     /* The data block is the one witness that cannot have been overwritten by whoever filled the
-     * page: a value there means this slot carries an answer, whatever attribute it still wears. */
+     * page: every edit and every save writes it from what the reader sees, so where it holds a value
+     * and the markup shows something else, the markup is what was left behind. */
     var v=get(el.getAttribute("data-edit"));
     if(v===null||v===undefined||typeof v==="object"||String(v).trim()==="") return;
-    var ph=el.hasAttribute("data-ph"), text=textOf(el).trim();
-    el.removeAttribute("data-ph");
-    /* And a slot still showing its prompt, or nothing, shows the answer: whoever filled it wrote the
-     * JSON and left that row of the markup as it shipped. */
-    if(el.hasAttribute("data-num")||el.querySelector("[data-edit]")) return;
-    if((ph&&text!==String(v).trim())||text===""){
-      el.textContent=String(v); el.classList.remove("tag--empty","field-text--empty");
+    if(kind){
+      var opt=(ENUMS[kind]||[]).filter(function(o){ return o[0]===v; })[0]; if(!opt) return;
+      el.className=el.className.replace(/chip--\w+/,"chip--"+opt[2]);
+      var label=el.querySelector(".chip-text"); if(label) label.textContent=opt[1];
+      el.removeAttribute("data-ph"); return;
     }
+    el.removeAttribute("data-ph");
+    if(el.hasAttribute("data-num")){ if(textOf(el).trim()!==String(v)) el.textContent=String(v); return; }
+    if(el.querySelector("[data-edit]")) return;
+    var other=Array.prototype.filter.call(el.children,function(c){ return !(c.classList&&c.classList.contains("row-del")); });
+    if(other.length) return;
+    if(textOf(el).trim()!==String(v).trim()){
+      var del=el.querySelector(":scope > .row-del"); el.textContent=String(v); if(del) el.appendChild(del);
+    }
+    el.classList.remove("tag--empty","field-text--empty");
   });
 }
 function capturePrompts(){
@@ -575,8 +584,13 @@ var b=document.createElement("strong"); b.textContent=c.have+" of "+c.total; tex
 text.appendChild(document.createTextNode((TEXT.progress||" of the items on this page are filled in. ")+open));
 return c;
 }
+function retitle(){
+if(!CFG.title) return; var ok=true;
+var t=String(CFG.title).replace(/\{([^{}]+)\}/g,function(all,k){ var x=get(k); if(typeof x!=="string"||!x.trim()){ ok=false; return all; } return x.trim(); });
+if(ok) document.title=t;
+}
 function sync(){
-var c=redrawProgress(); var n=document.getElementById("tool-count");
+retitle(); var c=redrawProgress(); var n=document.getElementById("tool-count");
 if(n&&c) n.textContent=c.have+" of "+c.total+" answered";
 paintQuestions();
 if(dirty) scheduleDraft();

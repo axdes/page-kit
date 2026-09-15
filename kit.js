@@ -733,6 +733,43 @@ n.textContent=String(v); n.removeAttribute("data-ph"); n.classList.remove("tag--
 var q=PROMPTS[slotKey(n)]; n.textContent=q||"";
 if(q) n.setAttribute("data-ph",""); else n.removeAttribute("data-ph");
 }
+/* A ROW THE PAGE SHIPPED CAN BE THE WRONG SHAPE FOR ITS DATA. The second card's metrics ship as
+ * "no number yet" rows, and a metric with a before and an after written into one of them has nowhere
+ * to show those. When a row of the same kind anywhere on the page (the same list path, whatever card
+ * it sits in) fits more of what the item actually says, the shipped row is redrawn in that shape, in
+ * place, and filled from the data. Keys the config keeps as defaults (a status, a kind) do not count:
+ * an empty row with only its default status stays the example it shipped as. */
+function fitOf(item,proto){
+var keys={}, k, n=0;
+editSlots(proto).forEach(function(el){ keys[String(el.getAttribute("data-edit")).split(".").pop()]=1; });
+for(k in item) if(!KEEP[k]&&keys[k]&&item[k]!==null&&item[k]!==""&&typeof item[k]!=="object") n++;
+return n;
+}
+function kindOf(path){ return String(path).replace(/\[\d+\]/g,"[]"); }
+function refitRows(){
+var lists=Array.prototype.slice.call(document.querySelectorAll("[data-list]"));
+lists.forEach(function(listEl){
+var base=listEl.getAttribute("data-list"), arr=get(base); if(!Array.isArray(arr)) return;
+var kind=kindOf(base), protos=[];
+lists.forEach(function(other){ if(kindOf(other.getAttribute("data-list"))===kind) protos=protos.concat(protosOf(other)); });
+rows(listEl).forEach(function(row,i){
+var item=arr[i]; if(item===null||typeof item!=="object"||Array.isArray(item)) return;
+if(row.querySelector("[data-list]")) return;
+var best=row, score=fitOf(item,row);
+protos.forEach(function(p){ var n=fitOf(item,p); if(n>score){ score=n; best=p; } });
+if(best===row) return;
+var copy=best.cloneNode(true);
+Array.prototype.forEach.call(copy.querySelectorAll(".row-del,.row-add"),function(x){ x.parentNode.removeChild(x); });
+copy.setAttribute("data-row",row.getAttribute("data-row"));
+var from=best.getAttribute("data-row");
+if(from) Array.prototype.forEach.call(copy.querySelectorAll("[data-edit],[data-row],[data-list]"),function(n){
+["data-edit","data-row","data-list"].forEach(function(at){ var v=n.getAttribute(at); if(v&&v.indexOf(from)===0) n.setAttribute(at,row.getAttribute("data-row")+v.slice(from.length)); });
+});
+listEl.replaceChild(copy,row); reindex(listEl);
+editSlots(copy).forEach(function(n){ if(!n.querySelector("[data-edit]")) fillSlot(n); });
+});
+});
+}
 /* A list can ship rows of different shapes - a metric with a before and an after, one with a single
  * value - so each item is drawn from the row whose slots fit the most of what it holds. */
 function bestFor(item,protos){
@@ -1068,7 +1105,7 @@ var v=get(path); if(v!==null&&v!==undefined&&String(v).trim()!=="") return;
 var d=new Date(), two=function(n){ return (n<10?"0":"")+n; };
 set(path, d.getFullYear()+"-"+two(d.getMonth()+1)+"-"+two(d.getDate()));
 }
-armSteps(); captureTemplates(); capturePrompts(); stampDate(); adoptAnswers(); growLists(); armSteps(); buildQuestions(); redrawScale(); sync();
+armSteps(); captureTemplates(); capturePrompts(); stampDate(); refitRows(); adoptAnswers(); growLists(); armSteps(); buildQuestions(); redrawScale(); sync();
 }
 
 var style=document.createElement("style"); style.id="kit-style"; style.textContent=__css;

@@ -1046,7 +1046,15 @@ document.addEventListener("paste",function(e){
   e.preventDefault();
   document.execCommand("insertText",false,(e.clipboardData||window.clipboardData).getData("text"));
 }); window.addEventListener("beforeunload",function(e){ if(dirty){ e.preventDefault(); e.returnValue=""; } });
-armSteps(); captureTemplates(); capturePrompts(); adoptAnswers(); growLists(); armSteps(); buildQuestions(); redrawScale(); sync();
+/* A page with no date in the path its config names for the stamp takes the day it is first opened:
+ * that is the day it was made. The reader can type another one, and the saved file keeps it. */
+function stampDate(){
+var path=CFG.stamp; if(!path) return;
+var v=get(path); if(v!==null&&v!==undefined&&String(v).trim()!=="") return;
+var d=new Date(), two=function(n){ return (n<10?"0":"")+n; };
+set(path, d.getFullYear()+"-"+two(d.getMonth()+1)+"-"+two(d.getDate()));
+}
+armSteps(); captureTemplates(); capturePrompts(); stampDate(); adoptAnswers(); growLists(); armSteps(); buildQuestions(); redrawScale(); sync();
 }
 
 var style=document.createElement("style"); style.id="kit-style"; style.textContent=__css;

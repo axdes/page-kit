@@ -53,7 +53,7 @@ cursor:pointer;font-size:var(--font-base)}
 line-height:var(--leading-tight);letter-spacing:-.01em}
 .ident-code{margin-top:var(--space-1);font-size:var(--font-xs);letter-spacing:.06em;
 text-transform:uppercase;color:var(--muted-foreground)}
-.tagline{margin-top:var(--space-3);font-size:var(--font-md);color:var(--muted-foreground);max-width:52rem}
+.tagline{margin-top:var(--space-3);font-size:var(--font-md);color:var(--muted-foreground)}
 .identity{margin-top:var(--space-6);display:flex;flex-direction:column;gap:var(--space-5);
 padding:var(--space-5) var(--space-6)}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:var(--space-5)}

@@ -53,7 +53,7 @@ cursor:pointer;font-size:var(--font-base)}
 line-height:var(--leading-tight);letter-spacing:-.01em}
 .ident-code{margin-top:var(--space-1);font-size:var(--font-xs);letter-spacing:.06em;
 text-transform:uppercase;color:var(--muted-foreground)}
-.tagline{margin-top:var(--space-3);font-size:var(--font-md);color:var(--muted-foreground)}
+.tagline{margin-top:var(--space-3);font-size:var(--font-md);color:var(--muted-foreground);max-width:52rem}
 .identity{margin-top:var(--space-6);display:flex;flex-direction:column;gap:var(--space-5);
 padding:var(--space-5) var(--space-6)}
 .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:var(--space-5)}
@@ -83,12 +83,12 @@ margin-bottom:var(--space-4)}
 .field-stack{display:flex;flex-direction:column;gap:var(--space-5)}
 .field-label{font-size:var(--font-xs);text-transform:uppercase;letter-spacing:.06em;
 color:var(--muted-foreground);margin-bottom:var(--space-2)}
-.field-text{font-size:var(--font-base);line-height:var(--leading-relaxed)}
+.field-text{font-size:var(--font-sm);line-height:var(--leading-relaxed)}
 .field-text--empty{color:var(--muted-foreground)} .chip-row{display:flex;flex-wrap:wrap;gap:var(--space-2)}
 .tag{font-size:var(--font-xs);color:var(--muted-foreground);background:var(--muted);
 border-radius:var(--radius-full);padding:var(--space-1) var(--space-3)}
 .tag--empty{background:transparent;padding-inline:0} .card--hero{padding:var(--space-6)}
-.hero-text{font-size:var(--font-base);line-height:var(--leading-relaxed);max-width:60rem}
+.hero-text{font-size:var(--font-md);line-height:var(--leading-relaxed);max-width:60rem}
 .scales{margin-top:var(--space-5)}
 .scale-score{margin-top:var(--space-2);font-size:var(--font-2xl);font-weight:700;
 line-height:var(--leading-none);letter-spacing:-.02em;color:var(--primary-accent)}
@@ -104,7 +104,7 @@ font-size:var(--font-xs);color:var(--muted-foreground);font-variant-numeric:tabu
 .shift{margin-top:var(--space-5);display:grid;grid-template-columns:1fr auto 1fr;
 gap:var(--space-4);align-items:stretch}
 .shift-side{background:var(--muted);border-radius:var(--radius);padding:var(--space-4);
-font-size:var(--font-base);line-height:var(--leading-relaxed);color:var(--muted-foreground)}
+font-size:var(--font-sm);color:var(--muted-foreground)}
 .shift-side--to{background:var(--card);color:var(--primary-soft-foreground);
 border:2px solid var(--primary-accent);padding:calc(var(--space-4) - 2px)}
 .shift-arrow{display:flex;align-items:center;color:var(--primary-accent);font-size:var(--font-lg)}
@@ -121,7 +121,7 @@ line-height:var(--leading-snug);margin-right:auto}
 .step-level{flex:none;font-size:var(--font-xs);font-weight:var(--font-weight-semibold);
 text-transform:uppercase;letter-spacing:.06em;color:var(--primary-accent);
 background:var(--muted);border-radius:var(--radius-full);padding:var(--space-1) var(--space-3)}
-.step-text{font-size:var(--font-base);color:var(--muted-foreground);line-height:var(--leading-relaxed)}
+.step-text{font-size:var(--font-sm);color:var(--muted-foreground);line-height:var(--leading-relaxed)}
 .metrics{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:var(--space-3)}
 .metric{display:grid;grid-template-rows:auto minmax(1.6em,auto) auto 1fr;gap:var(--space-2);
 background:var(--muted);border-radius:var(--radius);padding:var(--space-3)}
@@ -152,8 +152,10 @@ background:var(--card);border-radius:var(--radius-lg);
 padding:var(--space-4);break-inside:avoid}
 .tile-label{font-size:var(--font-xs);text-transform:uppercase;letter-spacing:.05em;
 color:var(--muted-foreground);line-height:var(--leading-snug)}
-.tile-value{font-size:var(--font-lg);font-weight:700;line-height:var(--leading-snug);
+.tile-value{font-size:var(--font-2xl);font-weight:700;line-height:var(--leading-none);
 color:var(--primary-accent);font-variant-numeric:tabular-nums}
+.tiles--long .tile-value:not(.tile-value--prose):not(.tile-value--empty){
+font-size:var(--font-lg);line-height:var(--leading-snug)}
 .tile-value--prose{font-size:var(--font-base);font-weight:var(--font-weight-semibold);
 line-height:var(--leading-snug);color:var(--foreground)}
 .tile-value--empty{font-size:var(--font-sm);font-weight:var(--font-weight-semibold);
@@ -210,7 +212,7 @@ background:var(--muted);border-radius:var(--radius-full);padding:0 var(--space-3
 .link-url{color:var(--primary-accent);overflow-wrap:anywhere;word-break:break-word}
 .lines{list-style:none;margin:var(--space-3) 0 0;padding:0;display:flex;flex-direction:column;gap:var(--space-4)}
 .line{border-left:2px solid var(--border);padding-left:var(--space-4)}
-.line-what{font-size:var(--font-base);line-height:var(--leading-relaxed)}
+.line-what{font-size:var(--font-sm);line-height:var(--leading-relaxed)}
 .line-foot{margin-top:var(--space-2);display:flex;align-items:center;gap:var(--space-2);flex-wrap:wrap}
 .line-amount{font-size:var(--font-sm);font-weight:var(--font-weight-semibold);
 font-variant-numeric:tabular-nums}
@@ -220,14 +222,14 @@ font-variant-numeric:tabular-nums}
 color:var(--muted-foreground)}
 
 .issues{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-4)}
-.issue-what{font-size:var(--font-base);line-height:var(--leading-relaxed)}
+.issue-what{font-size:var(--font-sm);line-height:var(--leading-relaxed)}
 .issue-fix{margin-top:var(--space-2);display:flex;gap:var(--space-2);align-items:flex-start;
 font-size:var(--font-sm);color:var(--primary-soft-foreground)}
 .issue-fix--none{color:var(--muted-foreground)} .issue-fix .icon{margin-top:.25em;flex:none}
 .issue-needs{margin-top:var(--space-2);font-size:var(--font-xs);color:var(--muted-foreground)}
 .qa-q{font-size:var(--font-xs);text-transform:uppercase;letter-spacing:.06em;
 color:var(--muted-foreground);margin-bottom:var(--space-2)}
-.qa-a{font-size:var(--font-base);line-height:var(--leading-relaxed)}
+.qa-a{font-size:var(--font-sm);line-height:var(--leading-relaxed)}
 .section-no{flex:none;font-size:inherit;font-weight:inherit;color:var(--muted-foreground);
 font-variant-numeric:tabular-nums}
 .section-name{min-width:0} [data-ph]{color:var(--muted-foreground)}
@@ -264,20 +266,11 @@ padding-inline:var(--space-5);box-shadow:none}
 [data-filed] #tools{background:none;box-shadow:none;padding:0;gap:0}
 [data-filed] #tool-count,[data-filed] #tool-questions,[data-filed] #tool-save,
 [data-filed] #tool-draft{display:none}
-[data-filed] #tool-edit{background:var(--card);color:var(--foreground);
-font-size:var(--font-md);padding:var(--space-3) var(--space-6);gap:var(--space-3);
+[data-filed] #tool-edit{background:var(--card);color:var(--muted-foreground);
 box-shadow:0 1px 2px rgb(0 0 0 / .14),0 6px 18px rgb(0 0 0 / .12)}
 [data-filed] #tool-edit:hover{background:var(--card);color:var(--primary-accent)}
 .tool-count{font-size:var(--font-xs);color:var(--neutral-400);
 font-variant-numeric:tabular-nums;padding-inline:var(--space-2);white-space:nowrap}
-.tip{position:absolute;z-index:70;max-width:22rem;padding:var(--space-2) var(--space-3);
-background:var(--neutral-900);color:var(--neutral-0);border:1px solid rgb(255 255 255 / .12);
-border-radius:var(--radius);box-shadow:var(--shadow-md);pointer-events:none;
-font-size:var(--font-sm);font-weight:var(--font-weight-regular);line-height:var(--leading-snug);
-text-transform:none;letter-spacing:0;text-align:left;animation:tip-in .12s ease}
-@keyframes tip-in{from{opacity:0;transform:translateY(-2px)}}
-.tagline,.hero-text,.field-text,.step-text,.shift-side,.qa-a,.issue-what,.line-what,.piece-role{white-space:pre-line}
-[data-editing] [data-edit][data-num]{min-width:2.75em;text-align:center}
 [data-editing] [data-edit]{outline:1px dashed rgb(255 107 26 / .55);outline-offset:2px;border-radius:2px;
 min-width:2ch;min-height:1.2em;display:inline-block;cursor:text}
 [data-editing] [data-edit]:not([data-enum]){background:var(--edit-wash);box-shadow:0 0 0 2px var(--edit-wash)}
@@ -368,7 +361,7 @@ border:1.5px solid var(--border)}
 .tools{flex-wrap:wrap;justify-content:center;max-width:calc(100vw - var(--space-6))}
 }
 @media print{
-.tools,.qpanel,.row-add,.row-del,.nojs,.notice,.tip{display:none!important}
+.tools,.qpanel,.row-add,.row-del,.nojs,.notice{display:none!important}
 }
 @media print{
 @page{size:A4;margin:12mm}
@@ -458,7 +451,6 @@ CHECKS.forEach(function(c){
 var kind=c[0], path=c[1], arg=c[3], v=get(path), list=Array.isArray(v)?v:[], ok=false;
 if(kind==="text") ok=txt(v);
 else if(kind==="set") ok=!!v;
-else if(kind==="number") ok=txt(v)&&/\d/.test(v)&&!(arg&&arg.status&&(arg.open||[]).indexOf(get(arg.status))>=0);
 else if(kind==="list") ok=Array.isArray(v);
 else if(kind==="min") ok=list.length>=arg;
 else if(kind==="anyText") ok=list.some(txt);
@@ -521,30 +513,19 @@ var PROMPTS={};
  * prompt this file shipped has been answered. Runs once, before anything is counted. */
 function adoptAnswers(){
   slots().forEach(function(el){
-    var kind=el.getAttribute("data-enum"); if(kind==="step") return;
+    if(el.hasAttribute("data-enum")) return;
     /* The data block is the one witness that cannot have been overwritten by whoever filled the
-     * page: every edit and every save writes it from what the reader sees, so where it holds a value
-     * and the markup shows something else, the markup is what was left behind. */
+     * page: a value there means this slot carries an answer, whatever attribute it still wears. */
     var v=get(el.getAttribute("data-edit"));
     if(v===null||v===undefined||typeof v==="object"||String(v).trim()==="") return;
-    if(kind){
-      var opt=(ENUMS[kind]||[]).filter(function(o){ return o[0]===v; })[0]; if(!opt) return;
-      el.className=el.className.replace(/chip--\w+/,"chip--"+opt[2]);
-      var label=el.querySelector(".chip-text"); if(label) label.textContent=opt[1];
-      el.removeAttribute("data-ph"); return;
-    }
+    var ph=el.hasAttribute("data-ph"), text=textOf(el).trim();
     el.removeAttribute("data-ph");
-    if(el.hasAttribute("data-num")){
-      var n=numIn(el,v); if(n===null) n=v; else if(n!==v) set(el.getAttribute("data-edit"),n);
-      if(textOf(el).trim()!==String(n)) el.textContent=String(n); return;
+    /* And a slot still showing its prompt, or nothing, shows the answer: whoever filled it wrote the
+     * JSON and left that row of the markup as it shipped. */
+    if(el.hasAttribute("data-num")||el.querySelector("[data-edit]")) return;
+    if((ph&&text!==String(v).trim())||text===""){
+      el.textContent=String(v); el.classList.remove("tag--empty","field-text--empty");
     }
-    if(el.querySelector("[data-edit]")) return;
-    var other=Array.prototype.filter.call(el.children,function(c){ return !(c.classList&&c.classList.contains("row-del")); });
-    if(other.length) return;
-    if(textOf(el).trim()!==String(v).trim()){
-      var del=el.querySelector(":scope > .row-del"); el.textContent=String(v); if(del) el.appendChild(del);
-    }
-    el.classList.remove("tag--empty","field-text--empty");
   });
 }
 function capturePrompts(){
@@ -568,10 +549,7 @@ return s;
 var answered=function(el){ return !el.hasAttribute("data-ph") && textOf(el).trim()!==""; };
 function redrawScale(){
 if(!SCALE) return;
-var max=Number(SCALE.max)||1, now=Number(get(SCALE.now))||0;
-/* A pinned target is the top of the scale, whatever the data says: nobody edits it. */
-if(SCALE.pin&&SCALE.target) set(SCALE.target,max);
-var target=Number(get(SCALE.target))||0;
+var max=Number(SCALE.max)||1, now=Number(get(SCALE.now))||0, target=Number(get(SCALE.target))||0;
 var fill=document.querySelector(".meter-fill"), mark=document.querySelector(".meter-target");
 if(fill) fill.style.width=(now/max*100)+"%";
 if(mark) mark.style.left=(target/max*100)+"%";
@@ -597,13 +575,8 @@ var b=document.createElement("strong"); b.textContent=c.have+" of "+c.total; tex
 text.appendChild(document.createTextNode((TEXT.progress||" of the items on this page are filled in. ")+open));
 return c;
 }
-function retitle(){
-if(!CFG.title) return; var ok=true;
-var t=String(CFG.title).replace(/\{([^{}]+)\}/g,function(all,k){ var x=get(k); if(typeof x!=="string"||!x.trim()){ ok=false; return all; } return x.trim(); });
-if(ok) document.title=t;
-}
 function sync(){
-retitle(); var c=redrawProgress(); var n=document.getElementById("tool-count");
+var c=redrawProgress(); var n=document.getElementById("tool-count");
 if(n&&c) n.textContent=c.have+" of "+c.total+" answered";
 paintQuestions();
 if(dirty) scheduleDraft();
@@ -627,23 +600,10 @@ dirty=true; sync(); return;
 set(el.getAttribute("data-edit"), text===""?null:text); dirty=true; sync();
 }
 function numOf(el){
-var text=textOf(el).replace(/,/g,".").replace(/[^0-9.]/g,"");
-return numIn(el,parseFloat(text));
-}
-/* A number slot keeps one decimal inside its range, whether it was typed or arrived in the data:
- * 2.9 stays 2.9, 2.94 becomes 2.9, 7 becomes the top of the range. */
-function numIn(el,v){
-var n=Number(v); if(v===null||v===""||isNaN(n)) return null;
+var text=textOf(el).replace(/,/g,".").replace(/[^0-9.]/g,""); var n=parseFloat(text);
+if(isNaN(n)) return null;
 var range=(el.getAttribute("data-num")||"").split("-"), lo=Number(range[0]), hi=Number(range[1]);
-return Math.min(hi,Math.max(lo,Math.round(n*10)/10));
-}
-/* Rows drawn from the data come after adoptAnswers, so every number slot is settled once more here. */
-function settleNumbers(){
-Array.prototype.forEach.call(document.querySelectorAll("[data-edit][data-num]"),function(el){
-if(el.closest("template")) return;
-var path=el.getAttribute("data-edit"), v=get(path), n=numIn(el,v); if(n===null) return;
-if(n!==v) set(path,n); if(textOf(el).trim()!==String(n)) el.textContent=String(n);
-});
+n=Math.min(hi,Math.max(lo,n)); return Math.round(n*10)/10;
 }
 function onBlur(e){
 var el=e.target.closest && e.target.closest("[data-edit]"); if(!el) return;
@@ -700,8 +660,8 @@ try{ shape=JSON.parse(holder.getAttribute("data-row-shape")); }catch(e){}
 }else{
 var first=rows(listEl)[0]; if(!first) return; dom=first.cloneNode(true);
 Array.prototype.forEach.call(dom.querySelectorAll(".row-del,.row-add"),function(b){ b.parentNode.removeChild(b); });
-Array.prototype.forEach.call(dom.querySelectorAll("[contenteditable],[data-tip],[aria-describedby]"),function(e){ e.removeAttribute("contenteditable"); e.removeAttribute("data-tip"); e.removeAttribute("aria-describedby"); });
-dom.removeAttribute("contenteditable"); dom.removeAttribute("data-tip"); dom.removeAttribute("aria-describedby");
+Array.prototype.forEach.call(dom.querySelectorAll("[contenteditable],[title]"),function(e){ e.removeAttribute("contenteditable"); e.removeAttribute("title"); });
+dom.removeAttribute("contenteditable"); dom.removeAttribute("title");
 var arr=get(listEl.getAttribute("data-list"));
 shape=(Array.isArray(arr)&&arr.length)?blankLike(arr[0]):(dom.hasAttribute("data-edit")?"":{});
 holder=document.createElement("template"); holder.setAttribute("data-row-template","");
@@ -758,43 +718,6 @@ n.textContent=String(v); n.removeAttribute("data-ph"); n.classList.remove("tag--
 }
 var q=PROMPTS[slotKey(n)]; n.textContent=q||"";
 if(q) n.setAttribute("data-ph",""); else n.removeAttribute("data-ph");
-}
-/* A ROW THE PAGE SHIPPED CAN BE THE WRONG SHAPE FOR ITS DATA. The second card's metrics ship as
- * "no number yet" rows, and a metric with a before and an after written into one of them has nowhere
- * to show those. When a row of the same kind anywhere on the page (the same list path, whatever card
- * it sits in) fits more of what the item actually says, the shipped row is redrawn in that shape, in
- * place, and filled from the data. Keys the config keeps as defaults (a status, a kind) do not count:
- * an empty row with only its default status stays the example it shipped as. */
-function fitOf(item,proto){
-var keys={}, k, n=0;
-editSlots(proto).forEach(function(el){ keys[String(el.getAttribute("data-edit")).split(".").pop()]=1; });
-for(k in item) if(!KEEP[k]&&keys[k]&&item[k]!==null&&item[k]!==""&&typeof item[k]!=="object") n++;
-return n;
-}
-function kindOf(path){ return String(path).replace(/\[\d+\]/g,"[]"); }
-function refitRows(){
-var lists=Array.prototype.slice.call(document.querySelectorAll("[data-list]"));
-lists.forEach(function(listEl){
-var base=listEl.getAttribute("data-list"), arr=get(base); if(!Array.isArray(arr)) return;
-var kind=kindOf(base), protos=[];
-lists.forEach(function(other){ if(kindOf(other.getAttribute("data-list"))===kind) protos=protos.concat(protosOf(other)); });
-rows(listEl).forEach(function(row,i){
-var item=arr[i]; if(item===null||typeof item!=="object"||Array.isArray(item)) return;
-if(row.querySelector("[data-list]")) return;
-var best=row, score=fitOf(item,row);
-protos.forEach(function(p){ var n=fitOf(item,p); if(n>score){ score=n; best=p; } });
-if(best===row) return;
-var copy=best.cloneNode(true);
-Array.prototype.forEach.call(copy.querySelectorAll(".row-del,.row-add"),function(x){ x.parentNode.removeChild(x); });
-copy.setAttribute("data-row",row.getAttribute("data-row"));
-var from=best.getAttribute("data-row");
-if(from) Array.prototype.forEach.call(copy.querySelectorAll("[data-edit],[data-row],[data-list]"),function(n){
-["data-edit","data-row","data-list"].forEach(function(at){ var v=n.getAttribute(at); if(v&&v.indexOf(from)===0) n.setAttribute(at,row.getAttribute("data-row")+v.slice(from.length)); });
-});
-listEl.replaceChild(copy,row); reindex(listEl);
-editSlots(copy).forEach(function(n){ if(!n.querySelector("[data-edit]")) fillSlot(n); });
-});
-});
 }
 /* A list can ship rows of different shapes - a metric with a before and an after, one with a single
  * value - so each item is drawn from the row whose slots fit the most of what it holds. */
@@ -931,51 +854,15 @@ var on=ROOT.hasAttribute("data-editing"), root=scope||document;
 var list=Array.prototype.slice.call(root.querySelectorAll("[data-edit]"));
 if(root.nodeType===1&&root.hasAttribute("data-edit")) list.unshift(root);
 list.forEach(function(el){
-if(!on){ el.removeAttribute("contenteditable"); el.removeAttribute("data-tip"); return; }
+if(!on){ el.removeAttribute("contenteditable"); el.removeAttribute("title"); return; }
 var q=askedAt(el.getAttribute("data-edit"));
-if(q) el.setAttribute("data-tip",q);
-if(STEP&&STEP.tip&&el.getAttribute("data-enum")==="step") el.setAttribute("data-tip",STEP.tip);
+if(q) el.setAttribute("title",q);
+if(STEP&&STEP.tip&&el.getAttribute("data-enum")==="step") el.setAttribute("title",STEP.tip);
 if(el.hasAttribute("data-enum")){ el.setAttribute("tabindex","0"); return; }
 el.setAttribute("contenteditable","plaintext-only");
 if(el.contentEditable!=="plaintext-only") el.setAttribute("contenteditable","true");
 });
-if(!on) hideTip();
 }
-/* The hint is drawn by the page, not the browser's grey title box: at once on focus, after a short
- * pause on hover, under the slot (above it near the bottom of the window), gone as soon as typing starts. */
-var tipEl=null, tipFor=null, tipTimer=0;
-function showTip(el){
-if(!el||!el.getAttribute("data-tip")) return;
-if(!tipEl){
-tipEl=document.createElement("div"); tipEl.id="tip"; tipEl.className="tip";
-tipEl.setAttribute("role","tooltip"); tipEl.hidden=true; document.body.appendChild(tipEl);
-}
-if(tipFor&&tipFor!==el) tipFor.removeAttribute("aria-describedby");
-tipFor=el; el.setAttribute("aria-describedby","tip");
-tipEl.textContent=el.getAttribute("data-tip"); tipEl.hidden=false;
-var x=0, y=0, n=el; while(n){ x+=n.offsetLeft; y+=n.offsetTop; n=n.offsetParent; }
-x-=parseFloat(getComputedStyle(ROOT).getPropertyValue("--qshift"))||0;
-var gap=8, w=tipEl.offsetWidth, h=tipEl.offsetHeight, sx=window.scrollX, sy=window.scrollY;
-var top=y+el.offsetHeight+gap; if(top+h>sy+window.innerHeight-gap&&y-gap-h>sy+gap) top=y-gap-h;
-tipEl.style.top=top+"px";
-tipEl.style.left=Math.max(sx+gap,Math.min(x,sx+window.innerWidth-w-3*gap))+"px";
-}
-function hideTip(){
-clearTimeout(tipTimer); if(tipFor) tipFor.removeAttribute("aria-describedby");
-tipFor=null; if(tipEl) tipEl.hidden=true;
-}
-document.addEventListener("mouseover",function(e){
-var el=e.target.closest&&e.target.closest("[data-tip]"); if(el&&el===tipFor) return;
-clearTimeout(tipTimer);
-if(!el){ if(tipFor&&tipFor!==document.activeElement) hideTip(); return; }
-tipTimer=setTimeout(function(){ showTip(el); },300);
-});
-document.addEventListener("focusin",function(e){
-var el=e.target.closest&&e.target.closest("[data-tip]"); if(el) showTip(el); else hideTip();
-});
-document.addEventListener("focusout",hideTip);
-document.addEventListener("input",hideTip,true);
-document.addEventListener("keydown",function(e){ if(e.key==="Escape") hideTip(); });
 function setEditing(on){
 if(on) ROOT.setAttribute("data-editing",""); else ROOT.removeAttribute("data-editing");
 if(on) ROOT.removeAttribute("data-filed");
@@ -1037,9 +924,9 @@ var clone=ROOT.cloneNode(true);
 clone.removeAttribute("data-editing"); clone.removeAttribute("data-questions");
 clone.removeAttribute("data-js"); clone.setAttribute("data-filed","");
 Array.prototype.forEach.call(clone.querySelectorAll("[contenteditable]"),function(e){ e.removeAttribute("contenteditable"); });
-Array.prototype.forEach.call(clone.querySelectorAll("[data-tip],[aria-describedby]"),function(e){ e.removeAttribute("data-tip"); e.removeAttribute("aria-describedby"); });
+Array.prototype.forEach.call(clone.querySelectorAll("[data-edit][title]"),function(e){ e.removeAttribute("title"); });
 Array.prototype.forEach.call(clone.querySelectorAll("[tabindex]"),function(e){ e.removeAttribute("tabindex"); });
-Array.prototype.forEach.call(clone.querySelectorAll(".row-del,.row-add,#tool-draft,#notice,#tip"),
+Array.prototype.forEach.call(clone.querySelectorAll(".row-del,.row-add,#tool-draft,#notice"),
 function(e){ if(e.parentNode) e.parentNode.removeChild(e); });
 var qp=clone.querySelector("#qpanel"); if(qp) qp.setAttribute("hidden","");
 var qb=clone.querySelector("#qpanel-body"); if(qb) qb.innerHTML=""; var te=clone.querySelector("#tool-edit");
@@ -1167,7 +1054,7 @@ var v=get(path); if(v!==null&&v!==undefined&&String(v).trim()!=="") return;
 var d=new Date(), two=function(n){ return (n<10?"0":"")+n; };
 set(path, d.getFullYear()+"-"+two(d.getMonth()+1)+"-"+two(d.getDate()));
 }
-armSteps(); captureTemplates(); capturePrompts(); stampDate(); refitRows(); adoptAnswers(); growLists(); settleNumbers(); armSteps(); buildQuestions(); redrawScale(); sync();
+armSteps(); captureTemplates(); capturePrompts(); stampDate(); adoptAnswers(); growLists(); armSteps(); buildQuestions(); redrawScale(); sync();
 }
 
 var style=document.createElement("style"); style.id="kit-style"; style.textContent=__css;

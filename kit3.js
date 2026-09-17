@@ -260,8 +260,7 @@ padding-inline:var(--space-5);box-shadow:none}
 #tools .tool--go:active{filter:brightness(.92)}
 #tools .tool--draft{border:1px dashed rgb(255 255 255 / .28);color:var(--neutral-400);font-weight:var(--font-weight-semibold)}
 #tools .tool--draft:hover{border-color:rgb(255 255 255 / .45)} [data-editing] #tool-save{display:none}
-/* A downloaded file keeps the same bar, with only what a reader needs in it. */
-[data-filed] #tool-count,[data-filed] #tool-questions,[data-filed] #tool-save,
+/* A downloaded file opens with the same full bar as the page it came from. */
 [data-filed] #tool-draft{display:none}
 [data-editing] #tool-slides{display:none}
 .tool-count{font-size:var(--font-xs);color:var(--neutral-400);

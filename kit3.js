@@ -2,6 +2,8 @@
  * The page the assistant returns carries only its data and one script tag; this file puts the rest
  * in, and bakes everything back into the file when the reader downloads it. */
 (function(){
+if(window.__kitRan) return; window.__kitRan=true;
+if(window.__kitReady) window.__kitReady();
 var __css=String.raw`:root{
 --grid-unit: 4px; --font-xs: 0.75rem; --font-sm: 0.8125rem; --font-base: 0.9375rem; --font-md: 1.0625rem; --font-lg: 1.25rem; --font-2xl: 1.875rem; --font-family: 'museo-sans', 'Inter', ui-sans-serif, system-ui, sans-serif; --font-weight-regular: 400; --font-weight-semibold: 600; --leading-none: 1; --leading-tight: 1.15; --leading-snug: 1.3; --leading-normal: 1.5; --leading-relaxed: 1.65; --radius: 8px; --space-1: calc(var(--grid-unit) * 1); --space-2: calc(var(--grid-unit) * 2); --space-3: calc(var(--grid-unit) * 3); --space-4: calc(var(--grid-unit) * 4); --space-5: calc(var(--grid-unit) * 5); --space-6: calc(var(--grid-unit) * 6); --space-8: calc(var(--grid-unit) * 8); --space-12: calc(var(--grid-unit) * 12); --space-16: calc(var(--grid-unit) * 16); --qpanel-w: 24rem; --page-w: 68rem; --qshift: 0px; --qshift-bar: 0px; --brand-200: #ffb13b; --brand-400: #ff6b1a; --brand-700: #a94712; --neutral-0: #ffffff; --neutral-100: #f1f6fd; --neutral-200: #ebf0f7; --neutral-400: #bbbfc6; --neutral-700: #5f6369; --neutral-800: #3b3f45; --neutral-820: #2c3036; --neutral-900: #1f2328; --success-50: #e6f6eb; --success-200: #9ddbaf; --success-900: #006529; --warning-100: #fffac8; --warning-200: #fff6a3; --warning-930: #6b4915; --shadow-md: 0 4px 12px rgb(0 0 0 / 0.10); --radius-lg: calc(var(--radius) + var(--grid-unit)); --radius-full: 9999px; --foreground: var(--neutral-900); --card: var(--neutral-0); --muted: var(--neutral-100); --muted-foreground: var(--neutral-700); --primary: var(--brand-400); --primary-foreground: var(--neutral-0); --link: var(--primary-accent); --primary-accent: var(--brand-400); --primary-soft-foreground: var(--brand-700); --accent: var(--neutral-200); --success-soft: var(--success-50); --success-soft-foreground: var(--success-900); --warning-soft: var(--warning-100); --warning-soft-foreground: var(--neutral-900); --border: var(--neutral-200);
 --brand-mark: var(--brand-400); --info-soft: rgb(255 107 26 / .12); --info-soft-foreground: var(--brand-700); --hero-bg: #0e1114; --hero-fg: #ffffff; --hero-muted: #9aa1ab; --hero-soft: #c9ced6; --hero-line: rgb(255 255 255 / .12); --edit-wash: rgb(255 107 26 / .07); --edit-wash-hover: rgb(255 107 26 / .15);
@@ -1844,6 +1846,11 @@ set(path, d.getFullYear()+"-"+two(d.getMonth()+1)+"-"+two(d.getDate()));
 armSteps(); captureTemplates(); capturePrompts(); stampDate(); refitRows(); adoptAnswers(); growLists(); settleNumbers(); armSteps(); buildQuestions(); redrawScale(); sync();
 }
 
+/* An answer may carry its data island under an older name; the editor reads it as page-data. */
+if(!document.getElementById("page-data")){
+  var __old=document.querySelector('script[type="application/json"][id$="-data"]');
+  if(__old) __old.id="page-data";
+}
 var style=document.createElement("style"); style.id="kit-style"; style.textContent=__css;
 document.head.appendChild(style);
 var fallback=document.getElementById("kit-fallback"); if(fallback) fallback.parentNode.removeChild(fallback);
@@ -1864,10 +1871,11 @@ window.__bake=function(doc){
   if(doc.indexOf("data-kit")<0) return doc;
   var inline=function(fn){ return "<script>("+String(fn).replace(/<\/script/gi,"<\\/script")+")();</script>"; };
   return doc
-    .replace(/<script[^>]+data-kit[^>]*><\/script>/,function(){return "";})
+    .replace(/<script[^>]+data-kit[^>]*><\/script>/g,function(){return "";})
+    .replace(/<script data-kit-loader[^>]*>[\s\S]*?<\/script>/g,function(){return "";})
     .replace(/<style id="kit-style">[\s\S]*?<\/style>/,function(){return "";})
     .replace(/<style id="kit-fallback">[\s\S]*?<\/style>/,function(){return "";})
-    .replace(/<p id="kit-offline">[\s\S]*?<\/p>/,function(){return "";})
+    .replace(/<p id="kit-offline"[^>]*>[\s\S]*?<\/p>/,function(){return "";})
     .replace("</head>",function(){return "<style>"+__css+"</style></head>";})
     .replace("</body>",function(){return inline(__theme)+inline(__editor)+"</body>";});
 };
